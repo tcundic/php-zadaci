@@ -2,6 +2,11 @@
 
 if (isset($_POST['action']) && function_exists($_POST['action'])) {
 	$action = $_POST['action'];
+
+	// For testing error response
+	// header("HTTP/1.0 404 Not Found");
+	// exit();
+
 	echo json_encode($action());
 }
 

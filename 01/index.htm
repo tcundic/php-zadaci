@@ -25,6 +25,9 @@
 				success: function(result) {
 					$('.quote').html(result.quote);
 					$('.author').html(result.author);
+				},
+				error: function(xhr, status) {
+					$('.random-quote').hide();
 				}
 			});
 		});
