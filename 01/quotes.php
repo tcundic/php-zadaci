@@ -1,22 +1,37 @@
 <?php
 
-if (isset($_POST['action']) && function_exists($_POST['action'])) {
-	$action = $_POST['action'];
-
+if (isset($_POST['ids'])) {
+	if($_POST['ids'] != '') {
+		$ids = array_map('intval', explode(',', $_POST['ids']));
+	}
+	
 	// For testing error response
 	// header("HTTP/1.0 404 Not Found");
 	// exit();
 
-	echo json_encode($action());
+	getRandomQuote($ids);
 }
 
-function getRandomQuote() {
+function getRandomQuote($ids) {
 	$quotes = getAllQuotes();
 
 	$id = array_rand($quotes);
-	$quote = $quotes[$id];
 
-	return $quote;
+	if ($ids != null) {
+		// all quotes are already displayed to user so far
+		if (count($ids) == count($quotes)) {
+			return null;
+		}
+
+		while (in_array($id, $ids)) {
+			$id = array_rand($quotes);
+		}
+	}
+
+	$quote = $quotes[$id];
+	$quote['id'] = $id;
+
+	echo json_encode($quote);
 }
 
 
