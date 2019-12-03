@@ -56,6 +56,8 @@
 				success: function(result) {
 					$('.quote').html(result.quote);
 					$('.author').html(result.author);
+					// check if there is cookie with already displayed quotes so far
+					// and save that this particular quote was displayed
 					if (getCookie('quotes_id').trim() != '') {
 						createCookie('quotes_id', JSON.stringify(JSON.parse(getCookie('quotes_id')).concat([result.id])));
 					} else {

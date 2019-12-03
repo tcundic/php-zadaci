@@ -23,6 +23,7 @@ function getRandomQuote($ids) {
 			return null;
 		}
 
+		// find quote which haven't been displayed so far
 		while (in_array($id, $ids)) {
 			$id = array_rand($quotes);
 		}
